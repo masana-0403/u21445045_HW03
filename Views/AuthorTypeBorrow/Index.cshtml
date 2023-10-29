@@ -1,0 +1,125 @@
+﻿@model IEnumerable<u21445045_HW03.Models.ViewModels.AuthorTypeBorrow>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Authors</h2>
+        <p>
+            @Html.ActionLink("Create New", "AuthorCreate")
+        </p>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Author Name
+                </th>
+                <th>
+                    Author Surname
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.surname)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "AuthorEdit", new { id = item.authorId }) |
+                        @Html.ActionLink("Details", "AuthorDetails", new { id = item.authorId }) |
+                        @Html.ActionLink("Delete", "AuthorDelete", new { id = item.authorId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Types</h2>
+        <p>
+            @Html.ActionLink("Create New", "TypeCreate")
+        </p>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Type
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "TypeEdit", new { id = item.typeId }) |
+                        @Html.ActionLink("Details", "TypeDetails", new { id = item.typeId }) |
+                        @Html.ActionLink("Delete", "TypeDelete", new { id = item.typeId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+    
+</div>
+
+<div class="row">
+    <h2>Borrows</h2>
+    <p>
+        @Html.ActionLink("Create New", "BorrowCreate")
+    </p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Taken Date
+            </th>
+            <th>
+                Brought Date
+            </th>
+            <th>
+                Book Name
+            </th>
+            <th>
+                Student Name
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.takenDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.broughtDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Books.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.students.name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "BorrowEdit", new { id = item.borrowId }) |
+                    @Html.ActionLink("Details", "BorrowDetails", new { id = item.borrowId }) |
+                    @Html.ActionLink("Delete", "BorrowDelete", new { id = item.borrowId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+

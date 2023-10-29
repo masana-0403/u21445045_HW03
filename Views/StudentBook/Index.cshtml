@@ -1,0 +1,173 @@
+﻿@model IEnumerable<u21445045_HW03.Models.ViewModels.StudentBook>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Students</h2>
+        <p>
+            @Html.ActionLink("Create New", "StudentCreate")
+        </p>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Birthdate
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Class
+                </th>
+
+                <th>
+                    Points
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.birthdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.@class)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.point)
+                    </td>
+                    <td>
+                        @Html.ActionLink("StudentEdit", "StudentBook", new { id = item.studentId }) |
+                        @Html.ActionLink("StudentDetails", "StudentBook", new { id = item.studentId }) |
+                        @Html.ActionLink("StudentDelete", "StudentBook", new { id = item.studentId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Books</h2>
+        <p>
+            @Html.ActionLink("Create New", "BookCreate")
+        </p>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Book Title
+                </th>
+                <th>
+                    Page count
+                </th>
+                <th>
+                    Points
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Borrows
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pagecount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bookpoint)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.authors.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.types.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.borrows)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "BookEdit", "StudentBook", new { id = item.bookId }) |
+                        @Html.ActionLink("Details", "BookDetails", "StudentBook", new { id = item.bookId }) |
+                        @Html.ActionLink("Delete", "BookDelete", "StudentBook", new { id = item.bookId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<script>
+        $(function () {
+            // Function to handle Edit link click event in the Combined View and Details modal
+            $(".edit-link, .edit-link-in-modal").click(function (e) {
+                e.preventDefault();
+                var url = $(this).data("url");
+
+                $.get(url, function (data) {
+                    $("#modal-content").empty();
+                    $("#modal-content").html(data);
+                    $("#myModal").modal("show");
+                });
+            });
+
+            // Function to handle form submission within the modal
+            $("#modal-content").on("submit", "form", function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr("action");
+                var formData = form.serialize();
+
+                $.post(url, formData, function (data) {
+                    $("#myModal").modal("hide");
+                    location.reload();
+                });
+            });
+
+            // Function to handle other links (details, delete, create) within the modal
+            $(".details-link, .delete-link, .create-link, .create-lookup-link").click(function (e) {
+                e.preventDefault();
+                var url = $(this).data("url");
+
+                $.get(url, function (data) {
+                    $("#modal-content").empty();
+                    $("#modal-content").html(data);
+                    $("#myModal").modal("show");
+                });
+            });
+        });
+</script>
+
+
