@@ -56,9 +56,9 @@
                         @Html.DisplayFor(modelItem => item.point)
                     </td>
                     <td>
-                        @Html.ActionLink("StudentEdit", "StudentBook", new { id = item.studentId }) |
-                        @Html.ActionLink("StudentDetails", "StudentBook", new { id = item.studentId }) |
-                        @Html.ActionLink("StudentDelete", "StudentBook", new { id = item.studentId })
+                        @Html.ActionLink("Edit", "StudentBook", new { id = item.studentId }) |
+                        @Html.ActionLink("Details", "StudentBook", new { id = item.studentId }) |
+                        @Html.ActionLink("Delete", "StudentBook", new { id = item.studentId })
                     </td>
                 </tr>
             }
